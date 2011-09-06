@@ -1,0 +1,11 @@
+Ruby bindings for the FluidSynth software synthesizer.
+
+This is effectively a copy of pyFluidSynth
+(http://pypi.python.org/pypi/pyFluidSynth) minimally changed to be valid Ruby.
+The parts requiring Python-specific components (numpy and pyaudio) have
+been removed, namely get_samples and test2. Otherwise, the interface is exactly
+the same.
+
+--
+Daniel W. Steinbrook <dsteinbrook@gmail.com>
+Based on pyFluidSynth, released under the LGPL.
