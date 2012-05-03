@@ -89,7 +89,7 @@ class FluidSynth
   end
 
   def noteon(chan, key, vel)
-    if key < 0 or key > 12 or chan < 0 or vel < 0 or vel > 128
+    if key < 0 or key > 128 or chan < 0 or vel < 0 or vel > 128
       return false
     else
       return C.fluid_synth_noteon(@synth, chan, key, vel)
