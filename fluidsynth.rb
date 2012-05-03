@@ -48,6 +48,13 @@ class FluidSynth
     extern 'int fluid_synth_system_reset(void*)'
 
     extern 'void* fluid_synth_write_s16(void*, int, void*, int, int, void*, int, int)'
+    
+    extern 'void* new_fluid_player(void*)' 	
+    extern 'void delete_fluid_player(void*)'
+    extern 'int fluid_player_add(void*, char*)'
+    extern 'int fluid_player_play(void*)'
+    extern 'int fluid_player_join(void*)'
+    
   end
 
   def initialize(gain=0.2, samplerate=44100.0)
@@ -57,6 +64,7 @@ class FluidSynth
 
     C.fluid_settings_setint(@settings, 'synth.midi-channels', 256)
     @synth = C.new_fluid_synth(@settings)
+    @player = C.new_fluid_player(@synth)
     @audio_driver = nil
   end
 
@@ -72,6 +80,7 @@ class FluidSynth
     if not @audio_driver.nil?
       C.delete_fluid_audio_driver(@audio_driver)
     end
+    C.delete_fluid_player(@player)
     C.delete_fluid_synth(@synth)
     C.delete_fluid_settings(@settings)
   end
@@ -130,5 +139,10 @@ class FluidSynth
 
   def system_reset
     C.fluid_synth_system_reset(@synth)
+  end
+  
+  def play_file(file)
+    C.fluid_player_add(@player,file)
+    C.fluid_player_play(@player)
   end
 end
