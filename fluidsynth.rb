@@ -14,9 +14,9 @@ require 'test/unit/assertions'
 
 class FluidSynth
   module C
-    extend DL::Importable
+    extend DL::Importer
     begin
-      dlload 'libfluidsynth'
+      dlload 'libfluidsynth.dylib'
     rescue
       raise LoadError, "Couldn't find the FluidSynth library."
     end
